@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your HBU Business Audit | MacDonnell Appraisals</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    /* ââ Reset & Base ââ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f0f0;
+      color: #1a1a1a;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ââ Colors ââ */
+    :root {
+      --navy:   #1e2d5c;
+      --gold:   #c9a050;
+      --tan:    #f5ede0;
+      --pass:   #2e7d32;
+      --fail:   #c62828;
+      --light:  #f8f8f8;
+      --border: #ddd;
+    }
+
+    /* ââ Download Button (fixed top-right) ââ */
+    #download-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 999;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+      letter-spacing: 0.3px;
+      transition: background 0.2s;
+    }
+    #download-btn:hover { background: #b38840; }
+
+    /* ââ Page Wrapper ââ */
+    #audit-document {
+      max-width: 820px;
+      margin: 30px auto 60px;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    /* ââ Cover / Header ââ */
+    .cover {
+      background: var(--navy);
+      color: #fff;
+      padding: 36px 44px 32px;
+    }
+    .cover .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .cover h1 {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .cover .subtitle {
+      font-size: 20px;
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 26px;
+    }
+    .cover .intro-text {
+      font-size: 14px;
+      color: #cdd5e8;
+      line-height: 1.7;
+      max-width: 660px;
+      margin-bottom: 20px;
+    }
+
+    /* ââ Four Tests Overview ââ */
+    .tests-overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .test-chip {
+      padding: 16px 10px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .test-chip .num { font-size: 22px; display: block; margin-bottom: 6px; }
+    .chip-1 { background: var(--navy); border: 2px solid #4a6097; color: #fff; }
+    .chip-2 { background: var(--gold); color: #fff; }
+    .chip-3 { background: var(--navy); border: 2px solid #4a6097; color: #fff; }
+    .chip-4 { background: #b8a07a; color: #fff; }
+
+    /* ââ How to Use ââ */
+    .how-to {
+      background: rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 0;
+    }
+    .how-to h3 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .how-to ol { padding-left: 18px; }
+    .how-to li { font-size: 13px; color: #cdd5e8; margin-bottom: 4px; }
+
+    /* ââ Quote Banner ââ */
+    .quote-banner {
+      background: #f3ede1;
+      border-left: 5px solid var(--gold);
+      padding: 18px 24px;
+      margin: 0 44px 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+
+    /* ââ Section Divider ââ */
+    .section-divider {
+      background: var(--navy);
+      color: #fff;
+      padding: 8px 44px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: flex;
+      gap: 24px;
+    }
+    .section-divider span { color: var(--gold); }
+
+    /* ââ Test Section ââ */
+    .test-section { padding: 36px 44px 32px; border-bottom: 2px solid #eee; }
+    .test-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .test-number {
+      width: 46px; height: 46px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 18px; flex-shrink: 0;
+    }
+    .num-1 { background: var(--navy); color: #fff; }
+    .num-2 { background: var(--gold); color: #fff; }
+    .num-3 { background: var(--navy); color: #fff; }
+    .num-4 { background: #b8a07a; color: #fff; }
+    .test-title { font-size: 30px; font-weight: 800; color: var(--navy); }
+
+    /* ââ Key Question Box ââ */
+    .key-question {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ââ Diagnostic Questions ââ */
+    .diagnostics-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+    }
+    .diagnostic-q { margin-bottom: 24px; }
+    .q-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .q-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .q-text { font-weight: 600; font-size: 14px; color: #1a1a1a; line-height: 1.5; }
+    textarea {
+      width: 100%;
+      min-height: 72px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      background: transparent;
+      font-family: inherit;
+      font-size: 14px;
+      color: #333;
+      resize: vertical;
+      padding: 6px 4px;
+      outline: none;
+      line-height: 1.6;
+      display: block;
+    }
+    textarea:focus { border-bottom-color: var(--navy); }
+
+    /* ââ Pass / Fail ââ */
+    .rate-box {
+      background: #f9f5ee;
+      border: 1px solid #e2d9c8;
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 28px 0 20px;
+      flex-wrap: wrap;
+    }
+    .rate-label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #555; flex-shrink: 0; }
+    .pf-options { display: flex; gap: 12px; }
+    .pf-label {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      cursor: pointer;
+    }
+    .pf-label input[type="radio"] { display: none; }
+    .pf-btn {
+      padding: 10px 28px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 1px;
+      border: 3px solid transparent;
+      transition: all 0.15s;
+      cursor: pointer;
+      user-select: none;
+    }
+    .pf-pass .pf-btn { background: var(--pass); color: #fff; }
+    .pf-fail .pf-btn { background: var(--fail); color: #fff; }
+    .pf-label input:not(:checked) + .pf-btn { opacity: 0.35; }
+    .pf-label input:checked + .pf-btn { opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+    .circle-one { font-size: 12px; color: #888; font-style: italic; }
+
+    /* ââ Your Move Box ââ */
+    .your-move {
+      background: #f9f5ee;
+      border: 1px solid #e2d9c8;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .your-move h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .your-move p { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* ââ Scorecard ââ */
+    .scorecard-section { padding: 36px 44px 40px; }
+    .scorecard-section h2 { font-size: 28px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+    .scorecard-rule { border: none; border-top: 3px solid var(--gold); margin-bottom: 28px; }
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .score-card-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .score-card-item h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .score-card-item p { font-size: 12px; color: #555; margin-bottom: 14px; line-height: 1.5; }
+    .score-pf { display: flex; gap: 10px; }
+    .score-pf label { display: flex; align-items: center; cursor: pointer; }
+    .score-pf input[type="radio"] { display: none; }
+    .score-pf .spf-btn {
+      padding: 8px 20px;
+      border-radius: 5px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .score-pf .spf-pass { background: var(--pass); color: #fff; }
+    .score-pf .spf-fail { background: var(--fail); color: #fff; }
+    .score-pf input:not(:checked) + .spf-btn { opacity: 0.3; }
+    .score-pf input:checked + .spf-btn { opacity: 1; }
+
+    /* ââ My HBU Score Summary ââ */
+    .score-summary {
+      background: #eef1f9;
+      border: 1px solid #c5cde8;
+      border-radius: 10px;
+      padding: 22px 26px;
+      margin-bottom: 28px;
+    }
+    .score-summary h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .score-row label { font-size: 13px; color: #333; min-width: 220px; font-weight: 500; }
+    .score-row input[type="text"], .score-row input[type="number"] {
+      border: none;
+      border-bottom: 1px solid #aaa;
+      background: transparent;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 4px 4px;
+      outline: none;
+      min-width: 160px;
+      flex: 1;
+    }
+    .score-row input:focus { border-bottom-color: var(--navy); }
+
+    /* ââ Score Legend ââ */
+    .score-legend { margin-top: 8px; }
+    .score-legend h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .legend-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .legend-badge {
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 12px;
+      color: #fff;
+      min-width: 110px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .badge-44 { background: #2e7d32; }
+    .badge-34 { background: #1e2d5c; }
+    .badge-24 { background: #b8a07a; }
+    .badge-04 { background: #c62828; }
+    .legend-text { font-size: 13px; color: #444; line-height: 1.5; padding-top: 4px; }
+
+    /* ââ Footer ââ */
+    .doc-footer {
+      background: var(--navy);
+      color: #8fa0cc;
+      font-size: 11px;
+      padding: 14px 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .doc-footer a { color: #8fa0cc; text-decoration: none; }
+
+    /* ââ Download CTA at bottom ââ */
+    .download-cta {
+      text-align: center;
+      padding: 32px 44px 20px;
+      background: #f8f8f8;
+    }
+    .download-cta p { font-size: 13px; color: #666; margin-bottom: 14px; }
+    .download-cta-btn {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      box-shadow: 0 3px 12px rgba(30,45,92,0.3);
+      transition: background 0.2s;
+    }
+    .download-cta-btn:hover { background: #162247; }
+
+    /* ââ Print Styles ââ */
+    @media print {
+      #download-btn { display: none !important; }
+      body { background: #fff; }
+      #audit-document { box-shadow: none; margin: 0; max-width: 100%; }
+      .test-section { page-break-inside: avoid; }
+      .scorecard-section { page-break-before: always; }
+      textarea { border-bottom: 1px solid #ccc; min-height: 60px; }
+      .download-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Download Button -->
+  <button id="download-btn" onclick="downloadPDF()">â¬ Download My Results</button>
+
+  <div id="audit-document">
+
+    <!-- ââââââââââ COVER ââââââââââ -->
+    <div class="cover">
+      <div class="eyebrow">MacDonnell Appraisals &nbsp;|&nbsp; Founder Resources</div>
+      <h1>Your HBU Business Audit</h1>
+      <div class="subtitle">Highest &amp; Best Use â Applied to You</div>
+      <p class="intro-text">
+        Every real estate appraiser applies four tests to every parcel of land before determining its value.
+        These tests reveal whether a property is being used to its full potential, or whether it's being wasted.<br><br>
+        The same four tests apply to you as a CEO. This audit will walk you through each one, help you diagnose
+        where you're falling short, and give you one clear action to start fixing it.
+      </p>
+      <div class="tests-overview">
+        <div class="test-chip chip-1"><span class="num">01</span>Legally Permissible</div>
+        <div class="test-chip chip-2"><span class="num">02</span>Physically Possible</div>
+        <div class="test-chip chip-3"><span class="num">03</span>Financially Feasible</div>
+        <div class="test-chip chip-4"><span class="num">04</span>Maximally Productive</div>
+      </div>
+      <div class="how-to">
+        <h3>How to Use This Worksheet</h3>
+        <ol>
+          <li>Work through each of the four tests on the following pages.</li>
+          <li>Answer the diagnostic questions honestly â no one is grading you.</li>
+          <li>Circle PASS or FAIL for each test at the bottom of that page.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="quote-banner">
+      "You don't hire to grow your business, you hire to buy back your timeâ¦ Don't buy back your time to do nothing.
+      Buy it back to fill your life with things that bring you joy." â Dan Martell
+    </div>
+
+    <!-- ââââââââââ TEST 1 ââââââââââ -->
+    <div class="section-divider">Your Turn â <span>Test #1</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <div class="test-section">
+      <div class="test-header">
+        <div class="test-number num-1">01</div>
+        <div class="test-title">Legally Permissible</div>
+      </div>
+      <div class="key-question">
+        <strong>Key Question:</strong> If you disappeared for 3 weeks, would your clients still be fully protected,
+        legally, ethically, and by your industry's standard?
+      </div>
+      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">1</div>
+          <div class="q-text">Is your work product credible if YOU didn't personally touch every step of the process?</div>
+        </div>
+        <textarea name="t1q1" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">2</div>
+          <div class="q-text">Could a client or regulator challenge you because a non-licensed / generally skilled person handled part of the work?</div>
+        </div>
+        <textarea name="t1q2" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">3</div>
+          <div class="q-text">Does your quality standard depend on your physical presence, or on a documented system you built?</div>
+        </div>
+        <textarea name="t1q3" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="rate-box">
+        <div class="rate-label">Rate yourself on this test:</div>
+        <div class="pf-options">
+          <label class="pf-label pf-pass">
+            <input type="radio" name="t1pf" value="pass" />
+            <span class="pf-btn">PASS</span>
+          </label>
+          <label class="pf-label pf-fail">
+            <input type="radio" name="t1pf" value="fail" />
+            <span class="pf-btn">FAIL</span>
+          </label>
+        </div>
+        <span class="circle-one">(select one)</span>
+      </div>
+
+      <div class="your-move">
+        <h4>Your Move If You're Failing This Test:</h4>
+        <p>Document your quality standard. Write the system that produces the outcome, not the one that depends on you doing it.
+        Start by recording yourself doing one task, then turn it into a checklist.</p>
+      </div>
+    </div>
+
+    <!-- ââââââââââ TEST 2 ââââââââââ -->
+    <div class="section-divider">Your Turn â <span>Test #2</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <div class="test-section">
+      <div class="test-header">
+        <div class="test-number num-2">02</div>
+        <div class="test-title">Physically Possible</div>
+      </div>
+      <div class="key-question">
+        <strong>Key Question:</strong> Can one human body â yours â sustainably do everything your business
+        currently requires at your current volume?
+      </div>
+      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">1</div>
+          <div class="q-text">How many steps in your core process require YOUR specific license, signature, or judgment, and how many could a well-trained team member handle?</div>
+        </div>
+        <textarea name="t2q1" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">2</div>
+          <div class="q-text">If you got sick for 30 days, which parts of the business would stop, and which would run fine without you?</div>
+        </div>
+        <textarea name="t2q2" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">3</div>
+          <div class="q-text">Are you in the right seat on your own bus, or are you driving, navigating, AND selling tickets?</div>
+        </div>
+        <textarea name="t2q3" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="rate-box">
+        <div class="rate-label">Rate yourself on this test:</div>
+        <div class="pf-options">
+          <label class="pf-label pf-pass">
+            <input type="radio" name="t2pf" value="pass" />
+            <span class="pf-btn">PASS</span>
+          </label>
+          <label class="pf-label pf-fail">
+            <input type="radio" name="t2pf" value="fail" />
+            <span class="pf-btn">FAIL</span>
+          </label>
+        </div>
+        <span class="circle-one">(select one)</span>
+      </div>
+
+      <div class="your-move">
+        <h4>Your Move If You're Failing This Test:</h4>
+        <p>List every task you did this week. Circle the ones only you can do. Every other task is a delegation or hire
+        waiting to happen. Commit to removing one task from your plate within 30 days.</p>
+      </div>
+    </div>
+
+    <!-- ââââââââââ TEST 3 ââââââââââ -->
+    <div class="section-divider">Your Turn â <span>Test #3</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <div class="test-section">
+      <div class="test-header">
+        <div class="test-number num-3">03</div>
+        <div class="test-title">Financially Feasible</div>
+      </div>
+      <div class="key-question">
+        <strong>Key Question:</strong> If you hired yourself at your true market rate as a CEO, could your business
+        actually afford you?
+      </div>
+      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">1</div>
+          <div class="q-text">Are you pricing your work based on the industry average, or based on the value only YOU deliver at your speed and quality level?</div>
+        </div>
+        <textarea name="t3q1" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">2</div>
+          <div class="q-text">What are you trading away (time, health, freedom, relationships) that isn't showing up anywhere on your P&amp;L?</div>
+        </div>
+        <textarea name="t3q2" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">3</div>
+          <div class="q-text">If your fee doubled tomorrow, which clients would leave, and would that actually be a problem?</div>
+        </div>
+        <textarea name="t3q3" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="rate-box">
+        <div class="rate-label">Rate yourself on this test:</div>
+        <div class="pf-options">
+          <label class="pf-label pf-pass">
+            <input type="radio" name="t3pf" value="pass" />
+            <span class="pf-btn">PASS</span>
+          </label>
+          <label class="pf-label pf-fail">
+            <input type="radio" name="t3pf" value="fail" />
+            <span class="pf-btn">FAIL</span>
+          </label>
+        </div>
+        <span class="circle-one">(select one)</span>
+      </div>
+
+      <div class="your-move">
+        <h4>Your Move If You're Failing This Test:</h4>
+        <p>Raise your price by 20% on the next 5 new clients. See who objects. Price anchors to fear, not value â
+        the market will tell you where you actually stand.</p>
+      </div>
+    </div>
+
+    <!-- ââââââââââ TEST 4 ââââââââââ -->
+    <div class="section-divider">Your Turn â <span>Test #4</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <div class="test-section">
+      <div class="test-header">
+        <div class="test-number num-4">04</div>
+        <div class="test-title">Maximally Productive</div>
+      </div>
+      <div class="key-question">
+        <strong>Key Question:</strong> What are the 2â3 things in your business that ONLY YOU can do?
+        Everything else is the ransom.
+      </div>
+      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">1</div>
+          <div class="q-text">Look at your calendar from last week. What percentage of your time was spent on work only you can do, vs. work anyone could do with training?</div>
+        </div>
+        <textarea name="t4q1" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">2</div>
+          <div class="q-text">If you wrote down every task you did in the last 5 days, how many could a well-trained team member handle with a good process?</div>
+        </div>
+        <textarea name="t4q2" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="diagnostic-q">
+        <div class="q-row">
+          <div class="q-num">3</div>
+          <div class="q-text">What is the $10,000/hour version of your work, and how many hours of it did you actually do last week?</div>
+        </div>
+        <textarea name="t4q3" placeholder="Write your answer hereâ¦"></textarea>
+      </div>
+
+      <div class="rate-box">
+        <div class="rate-label">Rate yourself on this test:</div>
+        <div class="pf-options">
+          <label class="pf-label pf-pass">
+            <input type="radio" name="t4pf" value="pass" />
+            <span class="pf-btn">PASS</span>
+          </label>
+          <label class="pf-label pf-fail">
+            <input type="radio" name="t4pf" value="fail" />
+            <span class="pf-btn">FAIL</span>
+          </label>
+        </div>
+        <span class="circle-one">(select one)</span>
+      </div>
+
+      <div class="your-move">
+        <h4>Your Move If You're Failing This Test:</h4>
+        <p>Block 3 hours tomorrow for CEO-only work. Treat it like a board meeting â nothing cancels it.
+        Do this every week until protecting that time is non-negotiable.</p>
+      </div>
+    </div>
+
+    <!-- ââââââââââ SCORECARD ââââââââââ -->
+    <div class="section-divider">Your HBU Scorecard â <span>Tally Your Results</span></div>
+    <div class="scorecard-section">
+      <h2>Which Tests Are You Failing?</h2>
+      <hr class="scorecard-rule" />
+
+      <div class="scorecard-grid">
+        <div class="score-card-item">
+          <h4>01 &nbsp; Legally Permissible</h4>
+          <p>Could your business run without you for 3 weeks with zero client risk? Where are the potential liabilities?</p>
+          <div class="score-pf">
+            <label><input type="radio" name="s1pf" value="pass" /><span class="spf-btn spf-pass">PASS</span></label>
+            <label><input type="radio" name="s1pf" value="fail" /><span class="spf-btn spf-fail">FAIL</span></label>
+          </div>
+        </div>
+        <div class="score-card-item">
+          <h4>02 &nbsp; Physically Possible</h4>
+          <p>Have you separated what requires YOU from what a well-trained team member can do?</p>
+          <div class="score-pf">
+            <label><input type="radio" name="s2pf" value="pass" /><span class="spf-btn spf-pass">PASS</span></label>
+            <label><input type="radio" name="s2pf" value="fail" /><span class="spf-btn spf-fail">FAIL</span></label>
+          </div>
+        </div>
+        <div class="score-card-item">
+          <h4>03 &nbsp; Financially Feasible</h4>
+          <p>Are you charging for CEO-level value, not just industry-average labor?</p>
+          <div class="score-pf">
+            <label><input type="radio" name="s3pf" value="pass" /><span class="spf-btn spf-pass">PASS</span></label>
+            <label><input type="radio" name="s3pf" value="fail" /><span class="spf-btn spf-fail">FAIL</span></label>
+          </div>
+        </div>
+        <div class="score-card-item">
+          <h4>04 &nbsp; Maximally Productive</h4>
+          <p>Does your calendar reflect your highest-value work more than 60% of the time?</p>
+          <div class="score-pf">
+            <label><input type="radio" name="s4pf" value="pass" /><span class="spf-btn spf-pass">PASS</span></label>
+            <label><input type="radio" name="s4pf" value="fail" /><span class="spf-btn spf-fail">FAIL</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- My HBU Score -->
+      <div class="score-summary">
+        <h4>My HBU Score</h4>
+        <div class="score-row">
+          <label>Number of tests PASSED:</label>
+          <input type="number" name="tests_passed" min="0" max="4" placeholder="__ / 4" style="max-width:80px;" />
+          <span style="font-size:14px; color:#555;">&nbsp;/ 4</span>
+        </div>
+        <div class="score-row">
+          <label>The test costing me the most right now:</label>
+          <input type="text" name="biggest_cost" placeholder="Write hereâ¦" />
+        </div>
+        <div class="score-row">
+          <label>My one immediate action:</label>
+          <input type="text" name="action" placeholder="Write hereâ¦" />
+        </div>
+      </div>
+
+      <!-- Score Legend -->
+      <div class="score-legend">
+        <h4>What Your Score Means:</h4>
+        <div class="legend-row">
+          <div class="legend-badge badge-44">4 / 4 PASSING</div>
+          <div class="legend-text">You've bought your life back. Protect it, scale intentionally.</div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-badge badge-34">3 / 4 PASSING</div>
+          <div class="legend-text">One leak in the system. Find it, fix it. You're close.</div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-badge badge-24">2 / 4 PASSING</div>
+          <div class="legend-text">You're working hard in the wrong seats. Prioritize the two failing tests now.</div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-badge badge-04">0â1 / 4 HALT</div>
+          <div class="legend-text">
+            Your business doesn't have a growth problem â it has a structure problem. Before adding more clients,
+            marketing, or revenue, the foundation needs attention. Start with Test 1. Without a documented system,
+            you can't safely hand anything off â which means Tests 2, 3, and 4 stay broken too. Pick one task you
+            do every week and write down every step. That's your starting point.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download CTA -->
+    <div class="download-cta">
+      <p>When you're done, save a copy of your completed audit for your records.</p>
+      <button class="download-cta-btn" onclick="downloadPDF()">â¬ &nbsp; Download My Completed Audit</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+      <span>MacDonnell Appraisals &nbsp;|&nbsp; <a href="mailto:drew@appraisalsbymac.com">drew@appraisalsbymac.com</a> &nbsp;|&nbsp; (816) 200-0730</span>
+      <span><a href="https://appraisalsbymac.com">appraisalsbymac.com</a></span>
+    </div>
+
+  </div><!-- end #audit-document -->
+
+  <script>
+    function downloadPDF() {
+      const btn = document.getElementById('download-btn');
+      const ctaBtn = document.querySelector('.download-cta-btn');
+      btn.textContent = 'Generatingâ¦';
+      btn.disabled = true;
+      if (ctaBtn) { ctaBtn.textContent = 'Generatingâ¦'; ctaBtn.disabled = true; }
+
+      const element = document.getElementById('audit-document');
+
+      const opt = {
+        margin:       [8, 8, 8, 8],
+        filename:     'HBU-Business-Audit-My-Results.pdf',
+        image:        { type: 'jpeg', quality: 0.97 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+
+      // Temporarily hide download buttons from PDF
+      btn.style.display = 'none';
+      const ctaSection = document.querySelector('.download-cta');
+      if (ctaSection) ctaSection.style.display = 'none';
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        btn.style.display = '';
+        if (ctaSection) ctaSection.style.display = '';
+        btn.textContent = 'â¬ Download My Results';
+        btn.disabled = false;
+        if (ctaBtn) { ctaBtn.textContent = 'â¬  Download My Completed Audit'; ctaBtn.disabled = false; }
+      });
+    }
+  </script>
+</body>
+</html>

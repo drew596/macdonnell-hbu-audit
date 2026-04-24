@@ -6,7 +6,7 @@
   <title>Your HBU Business Audit | MacDonnell Appraisals</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
-    /* ââ Reset & Base ââ */
+    /* -- Reset & Base -- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -16,7 +16,7 @@
       line-height: 1.6;
     }
 
-    /* ââ Colors ââ */
+    /* -- Colors -- */
     :root {
       --navy:   #1e2d5c;
       --gold:   #c9a050;
@@ -27,7 +27,7 @@
       --border: #ddd;
     }
 
-    /* ââ Download Button (fixed top-right) ââ */
+    /* -- Download Button (fixed top-right) -- */
     #download-btn {
       position: fixed;
       top: 18px;
@@ -47,7 +47,7 @@
     }
     #download-btn:hover { background: #b38840; }
 
-    /* ââ Page Wrapper ââ */
+    /* -- Page Wrapper -- */
     #audit-document {
       max-width: 820px;
       margin: 30px auto 60px;
@@ -55,7 +55,7 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.12);
     }
 
-    /* ââ Cover / Header ââ */
+    /* -- Cover / Header -- */
     .cover {
       background: var(--navy);
       color: #fff;
@@ -92,7 +92,7 @@
       margin-bottom: 20px;
     }
 
-    /* ââ Four Tests Overview ââ */
+    /* -- Four Tests Overview -- */
     .tests-overview {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -113,7 +113,7 @@
     .chip-3 { background: var(--navy); border: 2px solid #4a6097; color: #fff; }
     .chip-4 { background: #b8a07a; color: #fff; }
 
-    /* ââ How to Use ââ */
+    /* -- How to Use -- */
     .how-to {
       background: rgba(255,255,255,0.08);
       border-radius: 6px;
@@ -124,7 +124,7 @@
     .how-to ol { padding-left: 18px; }
     .how-to li { font-size: 13px; color: #cdd5e8; margin-bottom: 4px; }
 
-    /* ââ Quote Banner ââ */
+    /* -- Quote Banner -- */
     .quote-banner {
       background: #f3ede1;
       border-left: 5px solid var(--gold);
@@ -136,7 +136,7 @@
       line-height: 1.5;
     }
 
-    /* ââ Section Divider ââ */
+    /* -- Section Divider -- */
     .section-divider {
       background: var(--navy);
       color: #fff;
@@ -150,7 +150,7 @@
     }
     .section-divider span { color: var(--gold); }
 
-    /* ââ Test Section ââ */
+    /* -- Test Section -- */
     .test-section { padding: 36px 44px 32px; border-bottom: 2px solid #eee; }
     .test-header {
       display: flex;
@@ -170,7 +170,7 @@
     .num-4 { background: #b8a07a; color: #fff; }
     .test-title { font-size: 30px; font-weight: 800; color: var(--navy); }
 
-    /* ââ Key Question Box ââ */
+    /* -- Key Question Box -- */
     .key-question {
       background: var(--navy);
       color: #fff;
@@ -183,7 +183,7 @@
       line-height: 1.6;
     }
 
-    /* ââ Diagnostic Questions ââ */
+    /* -- Diagnostic Questions -- */
     .diagnostics-label {
       font-size: 10px;
       font-weight: 700;
@@ -229,7 +229,7 @@
     }
     textarea:focus { border-bottom-color: var(--navy); }
 
-    /* ââ Pass / Fail ââ */
+    /* -- Pass / Fail -- */
     .rate-box {
       background: #f9f5ee;
       border: 1px solid #e2d9c8;
@@ -267,7 +267,7 @@
     .pf-label input:checked + .pf-btn { opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
     .circle-one { font-size: 12px; color: #888; font-style: italic; }
 
-    /* ââ Your Move Box ââ */
+    /* -- Your Move Box -- */
     .your-move {
       background: #f9f5ee;
       border: 1px solid #e2d9c8;
@@ -284,7 +284,7 @@
     }
     .your-move p { font-size: 13px; color: #444; line-height: 1.6; }
 
-    /* ââ Scorecard ââ */
+    /* -- Scorecard -- */
     .scorecard-section { padding: 36px 44px 40px; }
     .scorecard-section h2 { font-size: 28px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
     .scorecard-rule { border: none; border-top: 3px solid var(--gold); margin-bottom: 28px; }
@@ -323,7 +323,7 @@
     .score-pf input:not(:checked) + .spf-btn { opacity: 0.3; }
     .score-pf input:checked + .spf-btn { opacity: 1; }
 
-    /* ââ My HBU Score Summary ââ */
+    /* -- My HBU Score Summary -- */
     .score-summary {
       background: #eef1f9;
       border: 1px solid #c5cde8;
@@ -354,7 +354,7 @@
     }
     .score-row input:focus { border-bottom-color: var(--navy); }
 
-    /* ââ Score Legend ââ */
+    /* -- Score Legend -- */
     .score-legend { margin-top: 8px; }
     .score-legend h4 {
       font-size: 11px;
@@ -386,7 +386,7 @@
     .badge-04 { background: #c62828; }
     .legend-text { font-size: 13px; color: #444; line-height: 1.5; padding-top: 4px; }
 
-    /* ââ Footer ââ */
+    /* -- Footer -- */
     .doc-footer {
       background: var(--navy);
       color: #8fa0cc;
@@ -400,7 +400,7 @@
     }
     .doc-footer a { color: #8fa0cc; text-decoration: none; }
 
-    /* ââ Download CTA at bottom ââ */
+    /* -- Download CTA at bottom -- */
     .download-cta {
       text-align: center;
       padding: 32px 44px 20px;
@@ -422,7 +422,7 @@
     }
     .download-cta-btn:hover { background: #162247; }
 
-    /* ââ Print Styles ââ */
+    /* -- Print Styles -- */
     @media print {
       #download-btn { display: none !important; }
       body { background: #fff; }
@@ -437,15 +437,15 @@
 <body>
 
   <!-- Fixed Download Button -->
-  <button id="download-btn" onclick="downloadPDF()">â¬ Download My Results</button>
+  <button id="download-btn" onclick="downloadPDF()">&#x2B07; Download My Results</button>
 
   <div id="audit-document">
 
-    <!-- ââââââââââ COVER ââââââââââ -->
+    <!-- ========== COVER ========== -->
     <div class="cover">
       <div class="eyebrow">MacDonnell Appraisals &nbsp;|&nbsp; Founder Resources</div>
       <h1>Your HBU Business Audit</h1>
-      <div class="subtitle">Highest &amp; Best Use â Applied to You</div>
+      <div class="subtitle">Highest &amp; Best Use &mdash; Applied to You</div>
       <p class="intro-text">
         Every real estate appraiser applies four tests to every parcel of land before determining its value.
         These tests reveal whether a property is being used to its full potential, or whether it's being wasted.<br><br>
@@ -462,7 +462,7 @@
         <h3>How to Use This Worksheet</h3>
         <ol>
           <li>Work through each of the four tests on the following pages.</li>
-          <li>Answer the diagnostic questions honestly â no one is grading you.</li>
+          <li>Answer the diagnostic questions honestly &mdash; no one is grading you.</li>
           <li>Circle PASS or FAIL for each test at the bottom of that page.</li>
         </ol>
       </div>
@@ -470,12 +470,12 @@
 
     <!-- Quote -->
     <div class="quote-banner">
-      "You don't hire to grow your business, you hire to buy back your timeâ¦ Don't buy back your time to do nothing.
-      Buy it back to fill your life with things that bring you joy." â Dan Martell
+      "You don't hire to grow your business, you hire to buy back your time&hellip; Don't buy back your time to do nothing.
+      Buy it back to fill your life with things that bring you joy." &mdash; Dan Martell
     </div>
 
-    <!-- ââââââââââ TEST 1 ââââââââââ -->
-    <div class="section-divider">Your Turn â <span>Test #1</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <!-- ========== TEST 1 ========== -->
+    <div class="section-divider">Your Turn &mdash; <span>Test #1</span> &nbsp;|&nbsp; HBU Business Audit</div>
     <div class="test-section">
       <div class="test-header">
         <div class="test-number num-1">01</div>
@@ -485,14 +485,14 @@
         <strong>Key Question:</strong> If you disappeared for 3 weeks, would your clients still be fully protected,
         legally, ethically, and by your industry's standard?
       </div>
-      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+      <div class="diagnostics-label">Diagnostic Questions &mdash; Answer Honestly Below</div>
 
       <div class="diagnostic-q">
         <div class="q-row">
           <div class="q-num">1</div>
           <div class="q-text">Is your work product credible if YOU didn't personally touch every step of the process?</div>
         </div>
-        <textarea name="t1q1" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t1q1" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -500,7 +500,7 @@
           <div class="q-num">2</div>
           <div class="q-text">Could a client or regulator challenge you because a non-licensed / generally skilled person handled part of the work?</div>
         </div>
-        <textarea name="t1q2" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t1q2" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -508,7 +508,7 @@
           <div class="q-num">3</div>
           <div class="q-text">Does your quality standard depend on your physical presence, or on a documented system you built?</div>
         </div>
-        <textarea name="t1q3" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t1q3" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="rate-box">
@@ -533,25 +533,25 @@
       </div>
     </div>
 
-    <!-- ââââââââââ TEST 2 ââââââââââ -->
-    <div class="section-divider">Your Turn â <span>Test #2</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <!-- ========== TEST 2 ========== -->
+    <div class="section-divider">Your Turn &mdash; <span>Test #2</span> &nbsp;|&nbsp; HBU Business Audit</div>
     <div class="test-section">
       <div class="test-header">
         <div class="test-number num-2">02</div>
         <div class="test-title">Physically Possible</div>
       </div>
       <div class="key-question">
-        <strong>Key Question:</strong> Can one human body â yours â sustainably do everything your business
+        <strong>Key Question:</strong> Can one human body &mdash; yours &mdash; sustainably do everything your business
         currently requires at your current volume?
       </div>
-      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+      <div class="diagnostics-label">Diagnostic Questions &mdash; Answer Honestly Below</div>
 
       <div class="diagnostic-q">
         <div class="q-row">
           <div class="q-num">1</div>
           <div class="q-text">How many steps in your core process require YOUR specific license, signature, or judgment, and how many could a well-trained team member handle?</div>
         </div>
-        <textarea name="t2q1" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t2q1" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -559,7 +559,7 @@
           <div class="q-num">2</div>
           <div class="q-text">If you got sick for 30 days, which parts of the business would stop, and which would run fine without you?</div>
         </div>
-        <textarea name="t2q2" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t2q2" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -567,7 +567,7 @@
           <div class="q-num">3</div>
           <div class="q-text">Are you in the right seat on your own bus, or are you driving, navigating, AND selling tickets?</div>
         </div>
-        <textarea name="t2q3" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t2q3" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="rate-box">
@@ -587,13 +587,13 @@
 
       <div class="your-move">
         <h4>Your Move If You're Failing This Test:</h4>
-        <p>List every task you did this week. Circle the ones only you can do. Every other task is a delegation or hire
+        <p>List every task you did this week. Circle the ones only you can do. Every other task is a deleation or hire
         waiting to happen. Commit to removing one task from your plate within 30 days.</p>
       </div>
     </div>
 
-    <!-- ââââââââââ TEST 3 ââââââââââ -->
-    <div class="section-divider">Your Turn â <span>Test #3</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <!-- ========== TEST 3 ========== -->
+    <div class="section-divider">Your Turn &mdash; <span>Test #3</span> &nbsp;|&nbsp; HBU Business Audit</div>
     <div class="test-section">
       <div class="test-header">
         <div class="test-number num-3">03</div>
@@ -603,14 +603,14 @@
         <strong>Key Question:</strong> If you hired yourself at your true market rate as a CEO, could your business
         actually afford you?
       </div>
-      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+      <div class="diagnostics-label">Diagnostic Questions &mdash; Answer Honestly Below</div>
 
       <div class="diagnostic-q">
         <div class="q-row">
           <div class="q-num">1</div>
           <div class="q-text">Are you pricing your work based on the industry average, or based on the value only YOU deliver at your speed and quality level?</div>
         </div>
-        <textarea name="t3q1" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t3q1" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -618,7 +618,7 @@
           <div class="q-num">2</div>
           <div class="q-text">What are you trading away (time, health, freedom, relationships) that isn't showing up anywhere on your P&amp;L?</div>
         </div>
-        <textarea name="t3q2" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t3q2" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -626,7 +626,7 @@
           <div class="q-num">3</div>
           <div class="q-text">If your fee doubled tomorrow, which clients would leave, and would that actually be a problem?</div>
         </div>
-        <textarea name="t3q3" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t3q3" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="rate-box">
@@ -646,30 +646,30 @@
 
       <div class="your-move">
         <h4>Your Move If You're Failing This Test:</h4>
-        <p>Raise your price by 20% on the next 5 new clients. See who objects. Price anchors to fear, not value â
+        <p>Raise your price by 20% on the next 5 new clients. See who objects. Price anchors to fear, not value &mdash;
         the market will tell you where you actually stand.</p>
       </div>
     </div>
 
-    <!-- ââââââââââ TEST 4 ââââââââââ -->
-    <div class="section-divider">Your Turn â <span>Test #4</span> &nbsp;|&nbsp; HBU Business Audit</div>
+    <!-- ========== TEST 4 ========== -->
+    <div class="section-divider">Your Turn &mdash; <span>Test #4</span> &nbsp;|&nbsp; HBU Business Audit</div>
     <div class="test-section">
       <div class="test-header">
         <div class="test-number num-4">04</div>
         <div class="test-title">Maximally Productive</div>
       </div>
       <div class="key-question">
-        <strong>Key Question:</strong> What are the 2â3 things in your business that ONLY YOU can do?
+        <strong>Key Question:</strong> What are the 2&ndash;3 things in your business that ONLY YOU can do?
         Everything else is the ransom.
       </div>
-      <div class="diagnostics-label">Diagnostic Questions â Answer Honestly Below</div>
+      <div class="diagnostics-label">Diagnostic Questions &mdash; Answer Honestly Below</div>
 
       <div class="diagnostic-q">
         <div class="q-row">
           <div class="q-num">1</div>
           <div class="q-text">Look at your calendar from last week. What percentage of your time was spent on work only you can do, vs. work anyone could do with training?</div>
         </div>
-        <textarea name="t4q1" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t4q1" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -677,7 +677,7 @@
           <div class="q-num">2</div>
           <div class="q-text">If you wrote down every task you did in the last 5 days, how many could a well-trained team member handle with a good process?</div>
         </div>
-        <textarea name="t4q2" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t4q2" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="diagnostic-q">
@@ -685,7 +685,7 @@
           <div class="q-num">3</div>
           <div class="q-text">What is the $10,000/hour version of your work, and how many hours of it did you actually do last week?</div>
         </div>
-        <textarea name="t4q3" placeholder="Write your answer hereâ¦"></textarea>
+        <textarea name="t4q3" placeholder="Write your answer here&hellip;"></textarea>
       </div>
 
       <div class="rate-box">
@@ -705,13 +705,13 @@
 
       <div class="your-move">
         <h4>Your Move If You're Failing This Test:</h4>
-        <p>Block 3 hours tomorrow for CEO-only work. Treat it like a board meeting â nothing cancels it.
+        <p>Block 3 hours tomorrow for CEO-only work. Treat it like a board meeting &mdash; nothing cancels it.
         Do this every week until protecting that time is non-negotiable.</p>
       </div>
     </div>
 
-    <!-- ââââââââââ SCORECARD ââââââââââ -->
-    <div class="section-divider">Your HBU Scorecard â <span>Tally Your Results</span></div>
+    <!-- ========== SCORECARD ========== -->
+    <div class="section-divider">Your HBU Scorecard &mdash; <span>Tally Your Results</span></div>
     <div class="scorecard-section">
       <h2>Which Tests Are You Failing?</h2>
       <hr class="scorecard-rule" />
@@ -761,11 +761,11 @@
         </div>
         <div class="score-row">
           <label>The test costing me the most right now:</label>
-          <input type="text" name="biggest_cost" placeholder="Write hereâ¦" />
+          <input type="text" name="biggest_cost" placeholder="Write here&hellip;" />
         </div>
         <div class="score-row">
           <label>My one immediate action:</label>
-          <input type="text" name="action" placeholder="Write hereâ¦" />
+          <input type="text" name="action" placeholder="Write here&hellip;" />
         </div>
       </div>
 
@@ -785,11 +785,11 @@
           <div class="legend-text">You're working hard in the wrong seats. Prioritize the two failing tests now.</div>
         </div>
         <div class="legend-row">
-          <div class="legend-badge badge-04">0â1 / 4 HALT</div>
+          <div class="legend-badge badge-04">0&ndash;1 / 4 HALT</div>
           <div class="legend-text">
-            Your business doesn't have a growth problem â it has a structure problem. Before adding more clients,
+            Your business doesn't have a growth problem &mdash; it has a structure problem. Before adding more clients,
             marketing, or revenue, the foundation needs attention. Start with Test 1. Without a documented system,
-            you can't safely hand anything off â which means Tests 2, 3, and 4 stay broken too. Pick one task you
+            you can't safely hand anything off &mdash; which means Tests 2, 3, and 4 stay broken too. Pick one task you
             do every week and write down every step. That's your starting point.
           </div>
         </div>
@@ -799,7 +799,7 @@
     <!-- Download CTA -->
     <div class="download-cta">
       <p>When you're done, save a copy of your completed audit for your records.</p>
-      <button class="download-cta-btn" onclick="downloadPDF()">â¬ &nbsp; Download My Completed Audit</button>
+      <button class="download-cta-btn" onclick="downloadPDF()">&#x2B07; &nbsp; Download My Completed Audit</button>
     </div>
 
     <!-- Footer -->
@@ -814,9 +814,9 @@
     function downloadPDF() {
       const btn = document.getElementById('download-btn');
       const ctaBtn = document.querySelector('.download-cta-btn');
-      btn.textContent = 'Generatingâ¦';
+      btn.textContent = 'Generating...';
       btn.disabled = true;
-      if (ctaBtn) { ctaBtn.textContent = 'Generatingâ¦'; ctaBtn.disabled = true; }
+      if (ctaBtn) { ctaBtn.textContent = 'Generating...'; ctaBtn.disabled = true; }
 
       const element = document.getElementById('audit-document');
 
@@ -837,9 +837,9 @@
       html2pdf().set(opt).from(element).save().then(() => {
         btn.style.display = '';
         if (ctaSection) ctaSection.style.display = '';
-        btn.textContent = 'â¬ Download My Results';
+        btn.textContent = '&#x2B07; Download My Results';
         btn.disabled = false;
-        if (ctaBtn) { ctaBtn.textContent = 'â¬  Download My Completed Audit'; ctaBtn.disabled = false; }
+        if (ctaBtn) { ctaBtn.textContent = '&#x2B07;  Download My Completed Audit'; ctaBtn.disabled = false; }
       });
     }
   </script>
